@@ -1,8 +1,3 @@
-<?php
-$is_auth = rand(0, 1);
-
-$user_name = 'Анастасия'; // укажите здесь ваше имя
-?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -27,38 +22,38 @@ $user_name = 'Анастасия'; // укажите здесь ваше имя
         <a class="main-header__add-lot button" href="pages/add-lot.html">Добавить лот</a>
 
         <nav class="user-menu">
-        <?php if ($is_auth): ?>
+
+        <!-- здесь должен быть PHP код для показа меню и данных пользователя -->
+         <?php if ($is_auth): ?>
             <div class="user-menu__logged">
-  <p><?=$user_name;?></p>
-  <a class="user-menu__bets" href="pages/my-bets.html">Мои ставки</a>
-  <a class="user-menu__logout" href="#">Выход</a>
-</div>
-      <?php else: ?> 
-    <ul class="user-menu__list">
-  <li class="user-menu__item">
-    <a href="#">Регистрация</a>
-  </li>
-  <li class="user-menu__item">
-    <a href="#">Вход</a>
-  </li>
-</ul>
- </nav>
-        <?php endif; ?>
+               <p><?= $user_name; ?></p>
+               <a  class="user-menu__bets" href="pages/my-bets.html">Мои ставки</a>
+               <a  class="user-menu__logout" href="#">Выход</a>
+            </div>
+         <?php else: ?>
+            <ul class="user-menu__list">
+               <li class="user-menu__item">
+                  <a href="#">Регистрация</a>
+               </li>
+               <li class="user-menu__item">
+                  <a href="#">Выход</a>
+               </li>
+            </ul>
+         <?php endif; ?>
+        </nav>
     </div>
 </header>
 
-<main class="container">
-<?=$content; ?>
-</main>
+<main class="container"><?= $content; ?></main>
 </div>
 
 <footer class="main-footer">
     <nav class="nav">
         <ul class="nav__list container">
             <!--заполните этот список из массива категорий-->
-            <?php foreach ($categories as $val): ?>
+            <?php foreach ($categories as $category): ?>
             <li class="nav__item">
-                <a href="pages/all-lots.html"><?=$val;?></a>
+                <a href="pages/all-lots.html"><?= $category["name_category"]; ?></a>
             </li>
             <?php endforeach; ?>
         </ul>

@@ -1,12 +1,18 @@
 <?php
+/**
+ *
+ */
 
-function format_num($num){
-    $num = ceil($num);
+function format_num($num)
+{
+    $num = (ceil($num));
 
     if ($num >= 1000){
-        $num = number_format($num, 0, '', ' ');
-    }
-    return $num ." " ."₽";
+    $num =  (number_format($num, 0, '', ' '));
+
+}
+
+return $num ." " ."₽";
 
 };
 
@@ -33,4 +39,7 @@ function get_time_left($date){
     return $res;
 }
 
-?>
+$is_auth = rand(0, 1);
+
+$user_name = 'Анастасия'; // укажите здесь ваше имя
+
