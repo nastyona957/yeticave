@@ -42,4 +42,4 @@ CREATE TABLE bets (
 );
 
 
-
+ALTER TABLE lots ADD FULLTEXT (title, lot_description);

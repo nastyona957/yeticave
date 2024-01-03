@@ -109,7 +109,14 @@ $layout_content = include_template("layout.php", [
 ]);
 
 
-print($page_head);
-print($layout_content);
+
+if ($is_auth) {
+    print($layout_content);
+} else {
+    http_response_code();
+    http_response_code(403);
+    var_dump(http_response_code());
+}
+
 
 
