@@ -5,11 +5,16 @@
  * @return string Как цена будет показываться в карточке
 */
 function format_num ($num) {
-    $num = ceil($num);
-    $num = number_format($num, 0, '', ' ');
+    $num = (ceil($num));
 
-    return "$num ₽";
-    }
+            if ($num >= 1000){
+            $num =  (number_format($num, 0, '', ' '));
+
+        }
+
+        return $num ." " ."₽";
+
+        };
 
 function console_log( $data ){
     echo '<script>';
@@ -23,22 +28,17 @@ function console_log( $data ){
  * @return array
 */
 function get_time_left ($date) {
-    date_default_timezone_set('Europe/Moscow');
-    $final_date = date_create($date);
-    $cur_date = date_create("now");
-    $diff = date_diff($final_date, $cur_date);
-    $format_diff = date_interval_format($diff, "%d %H %I");
-    $arr = explode(" ", $format_diff);
-
-    $hours = $arr[0] * 24 + $arr[1];
-    $minutes = intval($arr[2]);
-    $hours = str_pad($hours, 2, "0", STR_PAD_LEFT);
-    $minutes = str_pad($minutes, 2, "0", STR_PAD_LEFT);
-
-    $res[] = $hours;
-    $res[] = $minutes;
-
-    return $res;
+    date_default_timezone_set("Europe/Moscow");
+    if (!is_numeric($date) ) {
+        $date = strtotime($date);
+    }
+    $diff = $date - time();
+    if ($diff <= 0) return [0, 0];
+    $hours = floor($diff / 3600);
+    $minutes = floor(($diff - $hours * 3600) / 60);
+    $hours = str_pad($hours, 2, '0', STR_PAD_LEFT);
+    $minutes = str_pad($minutes, 2, '0', STR_PAD_LEFT);
+    return [$hours, $minutes];
     }
 
 
@@ -153,3 +153,29 @@ function validate_date ($date) {
         return "Содержимое поля «дата завершения» должно быть датой в формате «ГГГГ-ММ-ДД»";
     }
 };
+/**
+ * Проверяет что содержимое поля является корректным адресом электронной почты
+ * @param string $email адрес электронной почты
+ * @return string Текст сообщения об ошибке
+ */
+function validate_email ($email) {
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        return "E-mail должен быть корректным";
+    }
+}
+
+/**
+ * Проверяет что содержимое поля укладывается в допустимый диапазон
+ * @param string $value содержимое поля
+ * @param int $min минимальное количество символов
+ * @param int $max максимальное количество символов
+ * @return string Текст сообщения об ошибке
+ */
+function validate_length ($value, $min, $max) {
+    if ($value) {
+        $len = strlen($value);
+        if ($len < $min or $len > $max) {
+            return "Значение должно быть от $min до $max символов";
+        }
+    }
+}

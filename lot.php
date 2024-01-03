@@ -33,18 +33,21 @@ if(!$lot) {
 
 
 $page_content = include_template("main-lot.php", [
-   "categories" => $categories,
-   "lot" => $lot
+    "categories" => $categories,
+    "lot" => $lot,
+    "is_auth" => $is_auth
 ]);
-$layout_content = include_template("layout-lot.php", [
-   "content" => $page_content,
-   "categories" => $categories,
-   "title" => $lot["title"],
-   "is_auth" => $is_auth,
-   "user_name" => $user_name
+$layout_content = include_template("layout.php", [
+    "content" => $page_content,
+    "categories" => $categories,
+    "title" => $lot["title"],
+    "is_auth" => $is_auth,
+    "user_name" => $user_name
 ]);
 
 print($layout_content);
+
+
 
 
 

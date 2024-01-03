@@ -1,25 +1,25 @@
 <section class="promo">
-        <h2 class="promo__title">Нужен стафф для катки?</h2>
-        <p class="promo__text">На нашем интернет-аукционе ты найдёшь самое эксклюзивное сноубордическое и горнолыжное снаряжение.</p>
+    <h2 class="promo__title">Нужен стафф для катки?</h2>
+    <p class="promo__text">На нашем интернет-аукционе ты найдёшь самое эксклюзивное сноубордическое и горнолыжное снаряжение.</p>
 
-        <ul class="promo__list">
-            <!--заполните этот список из массива категорий-->
-            <?php foreach ($categories as $category): ?>
+    <ul class="promo__list">
+        <!--заполните этот список из массива категорий-->
+        <?php foreach ($categories as $category) : ?>
             <li class="promo__item promo__item--<?= $category["character_code"]; ?>">
                 <a class="promo__link" href="pages/all-lots.html"><?= $category["name_category"]; ?></a>
             </li>
-            <?php endforeach; ?>
-        </ul>
-    </section>
-    <section class="lots">
-        <div class="lots__header">
-            <h2>Открытые лоты</h2>
-        </div>
+        <?php endforeach; ?>
+    </ul>
+</section>
+<section class="lots">
+    <div class="lots__header">
+        <h2>Открытые лоты</h2>
+    </div>
 
 
-        <ul class="lots__list">
-            <!--заполните этот список из массива с товарами-->
-            <?php foreach ($goods as $good): ?>
+    <ul class="lots__list">
+        <!--заполните этот список из массива с товарами-->
+        <?php foreach ($goods as $good) : ?>
             <li class="lots__item lot">
                 <div class="lot__image">
                     <img src="<?= $good["img"]; ?>" width="350" height="260" alt="">
@@ -33,12 +33,12 @@
                             <span class="lot__cost"><?= format_num(htmlspecialchars($good["start_price"])); ?></span>
                         </div>
                         <?php $res = get_time_left(htmlspecialchars($good["date_finish"])) ?>
-                        <div class="lot__timer timer <?php if ($res[0] < 1): ?>timer--finishing<?php endif; ?>">
+                        <div class="lot__timer timer <?php if ($res[0] < 1) : ?>timer--finishing<?php endif; ?>">
                             <?= "$res[0] : $res[1]"; ?>
                         </div>
                     </div>
                 </div>
             </li>
-            <?php endforeach; ?>
-        </ul>
-    </section>
+        <?php endforeach; ?>
+    </ul>
+</section>
