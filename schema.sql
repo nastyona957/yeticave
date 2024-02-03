@@ -1,3 +1,4 @@
+
 CREATE DATABASE yeticave;
 USE yeticave;
 

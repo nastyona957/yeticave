@@ -1,7 +1,4 @@
-<main>
-    <?= $header; ?>
-
-    <div class="container">
+<div class="container">
         <section class="lots">
             <h2>Результаты поиска по запросу «<span><?= $search; ?></span>»</h2>
             <?php if (!empty($goods)) : ?>
@@ -47,9 +44,8 @@
             </ul>
         <?php endif; ?>
     </div>
-    <!-- <? $pagination; ?> -->
+    <? $pagination; ?>
 <?php else : ?>
     <h2>Ничего не найдено по вашему запросу</h2>
 <?php endif; ?>
 </div>
-</main>
