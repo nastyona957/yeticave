@@ -8,7 +8,8 @@ require_once("models.php");
 $categories = get_categories($con);
 
 $page_404 = include_template("404.php", [
-    "categories" => $categories
+    "categories" => $categories,
+    "is_auth" => $is_auth
 ]);
 
 $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);

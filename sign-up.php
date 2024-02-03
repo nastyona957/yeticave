@@ -18,27 +18,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errors = [];
 
     $rules = [
-        "email" => function ($value) {
+        "email" => function($value) {
             return validate_email($value);
         },
-        "password" => function ($value) {
-            return validate_length($value, 6, 20);
+        "password" => function($value) {
+            return validate_length ($value, 6, 8);
         },
-        "message" => function ($value) {
-            return validate_length($value, 1, 1000);
+        "message" => function($value) {
+            return validate_length ($value, 12, 1000);
         }
     ];
 
-    $user = filter_input_array(
-        INPUT_POST,
-        [
-            "email" => FILTER_DEFAULT,
-            "password" => FILTER_DEFAULT,
-            "name" => FILTER_DEFAULT,
-            "message" => FILTER_DEFAULT
-        ],
-        true
-    );
+    $user = filter_input_array(INPUT_POST,
+    [
+        "email"=>FILTER_DEFAULT,
+        "password"=>FILTER_DEFAULT,
+        "name"=>FILTER_DEFAULT,
+        "message"=>FILTER_DEFAULT
+    ], true);
 
     foreach ($user as $field => $value) {
         if (isset($rules[$field])) {
@@ -60,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             "errors" => $errors
         ]);
     } else {
-        $users_data = get_users_data($con);
+        $users_data = get_users_data ($con);
         $emails = array_column($users_data, "email");
         $names = array_column($users_data, "user_name");
         if (in_array($user["email"], $emails)) {
@@ -100,13 +97,8 @@ $layout_content = include_template("layout.php", [
     "user_name" => $user_name
 ]);
 
-if ($is_auth) {
-    http_response_code();
-    http_response_code(403);
-    var_dump(http_response_code());
-} else {
-    print($layout_content);
-}
 
+
+print($layout_content);
 
 

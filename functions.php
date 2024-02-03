@@ -5,16 +5,11 @@
  * @return string Как цена будет показываться в карточке
 */
 function format_num ($num) {
-    $num = (ceil($num));
+    $num = ceil($num);
+    $num = number_format($num, 0, '', ' ');
 
-            if ($num >= 1000){
-            $num =  (number_format($num, 0, '', ' '));
-
-        }
-
-        return $num ." " ."₽";
-
-        };
+    return "$num ₽";
+    }
 
 function console_log( $data ){
     echo '<script>';
@@ -27,7 +22,8 @@ function console_log( $data ){
  * @param string $date Дата истечения времени
  * @return array
 */
-function get_time_left ($date) {
+function get_time_left($date){
+
     date_default_timezone_set("Europe/Moscow");
     if (!is_numeric($date) ) {
         $date = strtotime($date);
@@ -40,7 +36,6 @@ function get_time_left ($date) {
     $minutes = str_pad($minutes, 2, '0', STR_PAD_LEFT);
     return [$hours, $minutes];
     }
-
 
     /**
  * Создает подготовленное выражение на основе готового SQL запроса и переданных данных
@@ -153,6 +148,7 @@ function validate_date ($date) {
         return "Содержимое поля «дата завершения» должно быть датой в формате «ГГГГ-ММ-ДД»";
     }
 };
+//New
 /**
  * Проверяет что содержимое поля является корректным адресом электронной почты
  * @param string $email адрес электронной почты
